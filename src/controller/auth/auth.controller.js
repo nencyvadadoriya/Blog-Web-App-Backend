@@ -19,7 +19,8 @@ exports.registerUser = async (req, res) => {
         req.body.password = await bcrypt.hash(req.body.password, 11)
         req.body.create_At = moment().format('MMMM Do YYYY, h:mm:ss a');
         req.body.updated_At = moment().format('MMMM Do YYYY, h:mm:ss a');
-
+        req.body.profile_image = req.file.path ; 
+        
         const newUser = await userService.registerUser(req.body);
 
         return res.json(sucessResponse(StatusCodes.CREATED, false, MSG.USER_CREATED, newUser))
