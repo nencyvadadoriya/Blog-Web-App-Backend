@@ -11,4 +11,4 @@ route.post('/forgetPassword',forgetPassword)
 route.post('/verifyOtp',verifyOtp)
 route.post('/changePassword',changePassword)
 
-module.exports = route;
+module.exports = route;  

@@ -4,9 +4,9 @@ const { MSG } = require("../../utils/messageFormate");
 const user = require('../../models/user.model')
 
 module.exports = class UserService {
-    
+
     //register user
-    async registerUser(body) { 
+    async registerUser(body) {
         try {
             return await user.create(body)
         } catch (error) {
@@ -25,11 +25,11 @@ module.exports = class UserService {
 
         }
     }
-
+    
     //update user
-    async updateUser(id,body) {
+    async updateUser(id, body) {
         try {
-       return  await user.findByIdAndUpdate(id,body, {new : true})  
+            return await user.findByIdAndUpdate(id, body, { new: true })
         } catch (error) {
             console.log(error);
             return errorResponse(StatusCodes.INTERNAL_SERVER_ERROR, true, MSG.SERVER_ERROR)
