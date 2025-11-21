@@ -65,16 +65,15 @@ exports.forgetPassword = async (req, res) => {
         if (user.expired_attempt && user.expired_attempt < Date.now()) { 
             user.attempt = 0;
         }
-
         if (user.attempt >= 3) {
             return res.json(errorResponse(StatusCodes.TOO_MANY_REQUESTS, true, MSG.OTP_SEND_MANYTIME));
         }
 
-        user.attempt++; 
+        user.attempt ++; 
         const OTP = Math.floor(100000 + Math.random() * 900000);
         const expriedTime = new Date(Date.now() + 2 * 60 * 1000);
         await sendMail(email, OTP)
-        await userService.updateUser(user._id, { resetOtp: OTP, expriedOtp: expriedTime })
+        await userService.updateUser(user._id, { resetOtp: OTP, expriedOtp: expriedTime , attempt: user.attempt, attempt_expire: new Date(Date.now() + 60 * 60 * 1000) })
         return res.json(sucessResponse(StatusCodes.OK, false, MSG.OTP_SUCESSFULL_SEND))
 
     } catch (error) {
