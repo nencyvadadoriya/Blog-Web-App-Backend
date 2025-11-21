@@ -2,6 +2,7 @@ const { StatusCodes } = require("http-status-codes");
 const { errorResponse } = require("../../utils/responseFormate");
 const { MSG } = require("../../utils/messageFormate");
 const user = require('../../models/user.model')
+
 module.exports = class UserService {
     
     //register user
@@ -26,9 +27,9 @@ module.exports = class UserService {
     }
 
     //update user
-    updateUser() {
+    async updateUser(id,body) {
         try {
-
+       return  await user.findByIdAndUpdate(id,body, {new : true})  
         } catch (error) {
             console.log(error);
             return errorResponse(StatusCodes.INTERNAL_SERVER_ERROR, true, MSG.SERVER_ERROR)
