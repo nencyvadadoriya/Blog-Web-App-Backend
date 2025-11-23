@@ -12,62 +12,98 @@ const nodemailer = require('nodemailer')
         from: process.env.USER_EMAIL,
         to: to,
         subject: "BlogSphere - OTP Verification",
-        html: `
+       html: `
+<div style="
+  width:100%;
+  background:#f8fafc;
+  padding:40px 0;
+  font-family: 'Arial', sans-serif;
+">
   <div style="
-      width: 100%;
-      background: #f4f4f4;
-      padding: 40px 0;
-      font-family: Arial, sans-serif;
+    max-width:520px;
+    margin:auto;
+    background:#ffffff;
+    padding:32px 28px;
+    border-radius:14px;
+    border:1px solid #e5e7eb;
   ">
-    <div style="
-        max-width: 500px;
-        margin: auto;
-        background: white;
-        padding: 25px;
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    ">
-      
-      <h2 style="text-align:center; color:#4F46E5; margin-bottom: 10px;">
-        <span style="font-size: 28px; font-weight: 700;">BlogSphere</span>
-      </h2>
 
-      <p style="font-size: 15px; color:#444;">
-        Hi, your OTP for resetting the password is:
-      </p>
-
+    <!-- TOP BRAND STRIP -->
+    <div style="text-align:center; margin-bottom:25px;">
       <div style="
-          text-align:center;
-          margin: 25px 0;
+        display:inline-block;
+        padding:10px 22px;
+        background:#eef2ff;
+        border-radius:50px;
+        color:#4F46E5;
+        font-weight:700;
+        font-size:20px;
       ">
-        <span style="
-            font-size: 30px;
-            font-weight: 700;
-            letter-spacing: 5px;
-            color: #4F46E5;
-            background: #eef2ff;
-            padding: 10px 20px;
-            border-radius: 8px;
-            display: inline-block;
-        ">
-          ${OTP}
-        </span>
+        BlogSphere
       </div>
-
-      <p style="font-size: 14px; color:#555;">
-        This OTP is valid for <b>2 minutes</b>.  
-        Do not share it with anyone for security reasons.
+      <p style="margin:10px 0 0; font-size:14px; color:#6b7280;">
+        Account Security Verification
       </p>
-
-      <br/>
-
-      <p style="font-size: 13px; color:#888; text-align:center;">
-        © 2025 BlogSphere. All rights reserved.
-      </p>
-
     </div>
+
+    <!-- MAIN MESSAGE -->
+    <p style="font-size:15px; color:#444; line-height:1.6;">
+      Hi,
+      <br/><br/>
+      Use the verification code below to confirm your identity and continue
+      with your password reset request.
+    </p>
+
+    <!-- OTP BOX -->
+    <div style="text-align:center; margin:30px 0;">
+      <div style="
+        font-size:36px;
+        font-weight:800;
+        letter-spacing:10px;
+        color:#1e3a8a;
+        padding:18px 28px;
+        background:#f0f4ff;
+        border-radius:12px;
+        border:1px solid #c7d2fe;
+        display:inline-block;
+      ">
+        ${OTP}
+      </div>
+    </div>
+
+    <!-- INFO TEXT -->
+    <p style="font-size:14px; color:#555; line-height:1.6;">
+      This code is valid for <b>2 minutes</b>.  
+      For your safety, do not share it with anyone.
+    </p>
+
+    <!-- SUPPORT LINE -->
+    <p style="
+      font-size:13px; 
+      color:#7c7c7c; 
+      margin-top:25px;
+      line-height:1.6;
+    ">
+      If you did not request this, you can safely ignore this email or contact
+      our support team if you have concerns.
+    </p>
+
+    <!-- FOOTER -->
+    <div style="
+      margin-top:30px;
+      padding-top:18px;
+      text-align:center;
+      border-top:1px solid #eee;
+    ">
+      <p style="font-size:12px; color:#9ca3af;">
+        © 2025 BlogSphere • Secure Mail Service
+      </p>
+    </div>
+
   </div>
-  `,
+</div>
+`
+
     };
 
     await transporter.sendMail(mailOption)
